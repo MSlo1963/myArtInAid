@@ -1,0 +1,12 @@
+# Ignore backup files
+*.backup.*
+*.bak
+temp_*
+*.tmp
+
+# Ignore OS files
+.DS_Store
+Thumbs.db
+
+# Ignore test output
+*_output.yaml
