@@ -1,29 +1,29 @@
 -- id: myId
   sql: |
     select *
-    from customer 
-    where 
-      id = ? and 
-      status = ? 
-  meta: 
+    from customer
+    where
+      id = ? and
+      status = ?
+  meta:
     bind_values:
-      - status
       - id
+      - status
     db: fin
 
 
 -- id: anotherQuery
   sql: |
-    UPDATE products 
+    UPDATE products
     SET price = ?, category = ?
     WHERE id = ?
   meta:
     bind_values:
       - price
-      - id
       - category
+      - id
     db: inventory
-    
+
 
 -- id: simpleQuery
   sql: SELECT * FROM users WHERE active = ?
@@ -36,4 +36,3 @@
   sql: SELECT COUNT(*) FROM orders
   meta:
     db: sales
-

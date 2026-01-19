@@ -3,14 +3,14 @@
     SELECT c.*, a.address_line1, a.city
     FROM customers c
     LEFT JOIN addresses a ON c.id = a.customer_id
-    WHERE 
-      c.status = ? AND 
+    WHERE
+      c.status = ? AND
       c.created_date > ? AND
       a.country = ?
   meta:
     bind_values:
       - status
-      - id
+      - created_date
       - country
     db: customer_db
     description: "Get customer with address info"
@@ -18,19 +18,18 @@
 
 -- id: orderUpdate
   sql: |
-    UPDATE orders 
-    SET 
+    UPDATE orders
+    SET
       status = ?,
       updated_by = ?,
       updated_date = CURRENT_TIMESTAMP
-    WHERE 
-      id = ? AND 
+    WHERE
+      id = ? AND
       customer_id = ?
   meta:
     bind_values:
-      - updated_date
-      - updated_by
       - status
+      - updated_by
       - id
       - customer_id
     db: orders_db
@@ -38,16 +37,15 @@
 
 -- id: simpleSelect
   sql: SELECT * FROM products WHERE category = ? AND price > ?
-
   meta:
     bind_values:
       - category
+      - price
+
 
 -- id: noParametersQuery
   sql: SELECT COUNT(*) FROM users WHERE active = 1
   meta:
-    bind_values:
-      - active
     db: user_db
     cache_ttl: 300
 
@@ -56,4 +54,8 @@
   sql: |
     INSERT INTO audit_log (user_id, action, timestamp, details)
     VALUES (?, ?, CURRENT_TIMESTAMP, ?)
-
+  meta:
+    bind_values:
+      - user_id
+      - action
+      - details
