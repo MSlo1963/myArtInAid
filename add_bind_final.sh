@@ -26,7 +26,7 @@ BEGIN {
 }
 
 # New block starts
-/^-- id:/ {
+/^- id:/ {
     # Process previous block
     if (current_id != "") {
         process_block()
@@ -88,7 +88,7 @@ in_multiline_sql && /^[[:space:]]+/ && !/^[[:space:]]*[a-zA-Z_][a-zA-Z0-9_]*:/ {
 function extract_column_names(sql) {
     # Extract column names that appear before ? parameters
     # Remove SQL comments and normalize whitespace
-    gsub(/--.*$/, "", sql)
+    gsub(/-.*$/, "", sql)
     gsub(/[[:space:]]+/, " ", sql)
 
     columns = ""
