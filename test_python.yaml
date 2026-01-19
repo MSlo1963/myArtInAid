@@ -1,0 +1,25 @@
+-- id: myId
+  sql: |
+    select *
+    from customer
+    where
+      id = ? and
+      status = ?
+  meta:
+    db: fin
+
+-- id: anotherQuery
+  sql: |
+    UPDATE products
+    SET price = ?, category = ?
+    WHERE id = ?
+  meta:
+    db: inventory
+
+-- id: simpleQuery
+  sql: SELECT * FROM users WHERE active = ?
+
+-- id: noParams
+  sql: SELECT COUNT(*) FROM orders
+  meta:
+    db: sales
